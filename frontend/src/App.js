@@ -11,7 +11,10 @@ import { logoutUser } from "src/store/actions";
 
 class App extends Component {
 	static propTypes = {
-		user: PropTypes.object,
+		user: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object
+		]),
 		logoutUser: PropTypes.func.isRequired,
 	};
 	

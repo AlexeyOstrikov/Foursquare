@@ -30,11 +30,14 @@ class OnePlace extends Component {
 		deleteComment: PropTypes.func.isRequired,
 		place: PropTypes.object.isRequired,
 		match: PropTypes.object.isRequired,
-		user: PropTypes.object,
+		user: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object
+		]),
 		comments: PropTypes.array.isRequired,
 		photos: PropTypes.array.isRequired,
 		error: PropTypes.any,
-		errorPhoto: PropTypes.any,
+		errorPhotos: PropTypes.any,
 	};
 	
 	componentDidMount() {
@@ -56,7 +59,7 @@ class OnePlace extends Component {
 	
 	render() {
 		const {description, title, image, average} = this.props.place;
-		if (!average) return (<div>Loading</div>);
+		if (!average) return (<div>Loading...</div>);
 		
 		let img = `url(${notFound})`;
 		if (image) img = `${config.apiUrl}uploads/${image}`;
@@ -94,7 +97,7 @@ class OnePlace extends Component {
 						: <div className="one-place-page_message">Delete your review to make reviews!!!</div>
 					}
 					<UploadPhoto
-						errorPhoto={this.props.errorPhoto}
+						errorPhotos={this.props.errorPhotos}
 						uploadPhotoHandler={this.props.uploadPhoto}
 						placeId={this.props.match.params.id}/>
 				</Fragment>
@@ -110,7 +113,7 @@ const mapStateToProps = state => ({
 	comments: state.comments.currentComments,
 	user: state.user.user,
 	error: state.errors.commentsError,
-	errorPhoto: state.errors.photosError,
+	errorPhotos: state.errors.photosError,
 });
 
 const mapDispatchToProps = dispatch => {

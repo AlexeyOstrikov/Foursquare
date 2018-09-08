@@ -6,7 +6,10 @@ import "src/styles/Header.scss";
 
 export default class Header extends Component {
 	static propTypes = {
-		user: PropTypes.object,
+		user: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object
+		]),
 		logout: PropTypes.func.isRequired,
 	};
 	

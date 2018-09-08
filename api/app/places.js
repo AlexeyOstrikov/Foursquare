@@ -105,7 +105,7 @@ const createRouter = () => {
 	
 	router.post('/', [auth, upload.fields([{name: 'image'}])], (req, res) => {
 		const placeData = req.body;
-		
+		placeData.user = req.user._id;
 		if (req.files && req.files.image) {
 			placeData.image = req.files.image[0].filename
 		}

@@ -10,7 +10,12 @@ const PhotosSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Places',
 		required: true
-	}
+	},
+	user: {
+		type: Schema.Types.ObjectId,
+		ref: 'Users',
+		required: true
+	},
 });
 
 const Photos = mongoose.model('Photos', PhotosSchema);

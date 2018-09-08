@@ -37,7 +37,10 @@ Place.propTypes = {
 	clickHandler: PropTypes.func.isRequired,
 	deletePlace: PropTypes.func.isRequired,
 	quantityPhotos: PropTypes.number.isRequired,
-	user: PropTypes.object
+	user: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.object
+	]),
 };
 
 export default Place;

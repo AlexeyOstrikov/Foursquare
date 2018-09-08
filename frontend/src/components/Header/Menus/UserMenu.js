@@ -5,7 +5,10 @@ import { FaSignOutAlt, FaUser } from "react-icons/fa/index";
 
 export default class UserMenu extends Component {
 	static propTypes = {
-		user: PropTypes.object,
+		user: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object
+		]),
 		logout: PropTypes.func.isRequired,
 	};
 	

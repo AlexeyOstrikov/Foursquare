@@ -22,6 +22,7 @@ const upload = multer({storage});
 const createRouter = () => {
 	router.post('/', [auth, upload.fields([{name: 'photo'}])], (req, res) => {
 		const photoData = req.body;
+		photoData.user = req.user._id;
 		if (req.files && req.files.photo) {
 			photoData.photo = req.files.photo[0].filename
 		} else {

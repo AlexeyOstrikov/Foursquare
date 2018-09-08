@@ -58,7 +58,10 @@ Comment.propTypes = {
 	food: PropTypes.number.isRequired,
 	service: PropTypes.number.isRequired,
 	interior: PropTypes.number.isRequired,
-	user: PropTypes.object,
+	user: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.object
+	]),
 	_id: PropTypes.string.isRequired,
 	deleteCommentHandler: PropTypes.func.isRequired,
 };

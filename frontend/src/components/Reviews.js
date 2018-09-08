@@ -5,7 +5,10 @@ import { Comment } from "src/components";
 export default class Reviews extends Component {
 	static propTypes = {
 		comments: PropTypes.array.isRequired,
-		user: PropTypes.object,
+		user: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object
+		]),
 		deleteReview: PropTypes.func.isRequired,
 	};
 	

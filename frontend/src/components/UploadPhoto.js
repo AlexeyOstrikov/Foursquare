@@ -10,7 +10,7 @@ export default class UploadPhoto extends Component {
 	static propTypes = {
 		placeId: PropTypes.any.isRequired,
 		uploadPhotoHandler: PropTypes.func.isRequired,
-		error: PropTypes.any,
+		errorPhotos: PropTypes.any,
 	};
 	
 	state = {
@@ -50,7 +50,7 @@ export default class UploadPhoto extends Component {
 	};
 	
 	render() {
-		const style = this.props.error ? { borderColor: "#ff0000" } : {};
+		const style = this.props.errorPhotos ? { borderColor: "#ff0000" } : {};
 		return (
 			<div className="upload-photo">
 				<h2>Upload photo</h2>

@@ -14,6 +14,11 @@ const PlacesSchema = new Schema({
 		type: String,
 		required: true
 	},
+	user: {
+		type: Schema.Types.ObjectId,
+		ref: 'Users',
+		required: true
+	},
 });
 
 const Places = mongoose.model('Places', PlacesSchema);

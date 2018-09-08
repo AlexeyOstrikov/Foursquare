@@ -10,7 +10,10 @@ class Gallery extends Component {
 	static propTypes = {
 		photos: PropTypes.array.isRequired,
 		deletePhoto: PropTypes.func.isRequired,
-		user: PropTypes.object,
+		user: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object
+		]),
 	};
 	
 	renderPhoto = ({photo, _id}) => {
