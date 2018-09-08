@@ -7,9 +7,17 @@
     border: 2px solid #000;
     border-radius: $radius;
     margin-bottom: 40px;
+    position: relative;
     @include shadow;
     &:hover {
         @include shadowHover;
+    }
+    &_delete.btn {
+        padding: 10px;
+        height: auto;
+        position: absolute;
+        top: 10px;
+        right: 10px;
     }
     &_image {
         width: 100%;

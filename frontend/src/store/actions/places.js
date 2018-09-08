@@ -51,3 +51,16 @@ export const fetchPlaceById = id => {
 		);
 	};
 };
+
+export const deletePlace = id => {
+	return dispatch => {
+		axios.delete(`/places/${id}`).then(
+			response => { // eslint-disable-line no-unused-vars
+				dispatch(fetchPlaces());
+			},
+			error => {
+				dispatch(placeFailure(error));
+			}
+		);
+	};
+};

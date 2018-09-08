@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addComment, fetchPlaceById, uploadPhoto, fetchComments, fetchPhotos, deleteComment } from "../store/actions";
+import { addComment, fetchPlaceById, uploadPhoto, fetchComments, fetchPhotos, deleteComment, deletePhoto } from "../store/actions";
 import PropTypes from "prop-types";
 import notFound from "src/assets/images/not-found.jpeg";
 import config from "src/config";
@@ -14,6 +14,7 @@ class OnePlace extends Component {
 		fetchPlaceById: PropTypes.func.isRequired,
 		fetchComments: PropTypes.func.isRequired,
 		fetchPhotos: PropTypes.func.isRequired,
+		deletePhoto: PropTypes.func.isRequired,
 		addComment: PropTypes.func.isRequired,
 		uploadPhoto: PropTypes.func.isRequired,
 		deleteComment: PropTypes.func.isRequired,
@@ -32,6 +33,14 @@ class OnePlace extends Component {
 		}
 	}
 	
+	isNotCommitted = () => {
+		if(this.props.user) {
+			const index = this.props.comments.findIndex(comment =>
+				comment.rateUser._id === this.props.user._id);
+			return index === -1;
+		}
+	};
+	
 	render() {
 		const {place: {description, title, image, average}} = this.props;
 		let img = `url(${notFound})`;
@@ -49,18 +58,28 @@ class OnePlace extends Component {
 				</div>
 				<Ratings average={average}/>
 				{(this.props.photos && this.props.photos.length !== 0) &&
-					<Gallery photos={this.props.photos}/>
+					<Gallery
+						deletePhoto={this.props.deletePhoto}
+						user={this.props.user}
+						photos={this.props.photos}/>
 				}
 				{(this.props.comments && this.props.comments.length !== 0) &&
 					<Reviews
 						deleteReview={this.props.deleteComment}
-						user={this.props.user ? this.props.user : null}
+						user={this.props.user}
 						comments={this.props.comments}/>
 				}
 				{this.props.user &&
 					<Fragment>
-						<AddReviewForm submitReview={this.props.addComment} placeId={this.props.match.params.id}/>
-						<UploadPhoto uploadPhotoHandler={this.props.uploadPhoto} placeId={this.props.match.params.id}/>
+						{this.isNotCommitted() ?
+							<AddReviewForm
+								submitReview={this.props.addComment}
+								placeId={this.props.match.params.id}/>
+							: <div className="one-place-page_message">Delete your review to make reviews!!!</div>
+						}
+						<UploadPhoto
+							uploadPhotoHandler={this.props.uploadPhoto}
+							placeId={this.props.match.params.id}/>
 					</Fragment>
 				}
 			</div>
@@ -83,6 +102,7 @@ const mapDispatchToProps = dispatch => {
 		addComment,
 		uploadPhoto,
 		deleteComment,
+		deletePhoto,
 	},
 	dispatch);
 };

@@ -6,6 +6,7 @@ const config = require('../config');
 const nanoid = require('nanoid');
 const multer = require('multer');
 const path = require('path');
+const permit = require('../middleware/permit');
 
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
@@ -37,6 +38,12 @@ const createRouter = () => {
 		Photos.find({placeId: req.params.id})
 		.then(result => res.send(result))
 		.catch(error => res.send(error));
+	});
+	
+	router.delete('/:id', [auth, permit('admin')], (req, res) => {
+		Photos.deleteOne({_id: req.params.id})
+		.then(result => res.send(result))
+		.catch(error => res.status(400).send(error));
 	});
 	
 	return router;

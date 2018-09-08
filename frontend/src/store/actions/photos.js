@@ -36,3 +36,16 @@ export const fetchPhotos = id => {
 		);
 	};
 };
+
+export const deletePhoto = id => {
+	return (dispatch, getState) => {
+		axios.delete(`/photos/${id}`).then(
+			response => { // eslint-disable-line no-unused-vars
+				dispatch(fetchPhotos(getState().places.currentPlace._id));
+			},
+			error => {
+				dispatch(photosFailure(error));
+			}
+		);
+	};
+};

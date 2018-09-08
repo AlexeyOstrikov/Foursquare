@@ -37,7 +37,15 @@ export default class UploadPhoto extends Component {
 		Object.keys(upload).forEach(key => {
 			formData.append(key, upload[key]);
 		});
-		this.props.uploadPhotoHandler(formData);
+		this.props.uploadPhotoHandler(formData).then(() => {
+			this.setState({
+				upload: {
+					photo: null,
+					placeId: this.props.placeId,
+				},
+				preview: null,
+			});
+		});
 	};
 	
 	render() {

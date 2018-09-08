@@ -116,6 +116,12 @@ const createRouter = () => {
 		.catch(error => res.status(400).send(error));
 	});
 	
+	router.delete('/:id', [auth, permit('admin')], (req, res) => {
+		Places.deleteOne({_id: req.params.id})
+		.then(result => res.send(result))
+		.catch(error => res.status(400).send(error));
+	});
+	
 	return router;
 };
 
