@@ -103,22 +103,23 @@ const createRouter = () => {
 		}).catch(error => res.send(error));
 	});
 	
-	router.post('/', [auth, upload.fields([{name: 'image'}])], (req, res) => {
+	router.post('/:checked', [auth, upload.fields([{name: 'image'}])], (req, res) => {
+		if (req.params.checked) return res.status(400).send({error: "You are not understand!"});
+		
 		const placeData = req.body;
+		
 		if (req.files && req.files.image) {
 			placeData.image = req.files.image[0].filename
 		}
 		
 		const item = new Places(placeData);
 		
-		item.save()
-		.then(places => res.send(places))
+		item.save().then(places => res.send(places))
 		.catch(error => res.status(400).send(error));
 	});
 	
 	router.delete('/:id', [auth, permit('admin')], (req, res) => {
-		Places.deleteOne({_id: req.params.id})
-		.then(result => res.send(result))
+		Places.deleteOne({_id: req.params.id}).then(result => res.send(result))
 		.catch(error => res.status(400).send(error));
 	});
 	

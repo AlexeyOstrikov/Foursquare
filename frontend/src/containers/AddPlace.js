@@ -20,11 +20,16 @@ class AddPlace extends Component {
 			image: "",
 		},
 		preview: null,
+		checked: false
 	};
 	
 	inputChangeHandler = event => {
 		const {name, value} = event.target;
 		this.setState({place: {...this.state.place, [name]: value}});
+	};
+	
+	checkboxChangeHandler = event => {
+		this.setState({checked: event.target.checked});
 	};
 	
 	fileChangeHandler = event => {
@@ -44,7 +49,7 @@ class AddPlace extends Component {
 		Object.keys(place).forEach(key => {
 			formData.append(key, place[key]);
 		});
-		this.props.addPlace(formData);
+		this.props.addPlace(formData, this.state.checked);
 	};
 	
 	render() {
@@ -80,7 +85,16 @@ class AddPlace extends Component {
 									labelText="Description"
 								/>
 							</div>
-							<div className="row flex flex--end">
+							<div className="row flex">
+								<div className="add-page_form_checkbox">
+									<input
+										onChange={this.checkboxChangeHandler}
+										checked={this.state.checked}
+										name="checkbox"
+										id="checkbox"
+										type="checkbox"/>
+									<label htmlFor="checkbox">I understand</label>
+								</div>
 								<Button>Create</Button>
 							</div>
 						</form>

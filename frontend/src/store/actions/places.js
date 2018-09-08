@@ -19,9 +19,9 @@ const fetchPlaceByIdSuccess = place => {
 	return {type: FETCH_PLACE_BY_ID_SUCCESS, place};
 };
 
-export const addPlace = (place) => {
+export const addPlace = (place, checked) => {
 	return dispatch => {
-		return axios.post("/places", place).then(
+		return axios.post(`/places/${checked}`, place).then(
 			response => { // eslint-disable-line no-unused-vars
 				NotificationManager.success("Success", "Create successful");
 				dispatch(push("/"));
