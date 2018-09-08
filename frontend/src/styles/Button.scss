@@ -5,7 +5,7 @@ button.btn , label.btn-label {
     padding: 0 30px;
     height: 60px;
     display: flex;
-    border: none;
+    border: 1px solid $purple;
     border-radius: $radius;
     background: $purple;
     font-size: 18px;
@@ -26,6 +26,9 @@ button.btn , label.btn-label {
     }
     span {
         margin-left: 10px;
+    }
+    &.delete {
+        background: $red;
     }
 }
 

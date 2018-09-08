@@ -2,8 +2,10 @@ import React from "react";
 import moment from "moment";
 import StarRatings from "react-star-ratings";
 import "src/styles/Comment.scss";
+import { Button } from "src/components";
+import PropTypes from "prop-types";
 
-const Comment = ({date, rateUser, comment, food, service, interior}) => {
+const Comment = ({deleteCommentHandler, date, rateUser, comment, food, service, interior, user, _id}) => {
 	return (
 		<div className="reviews_list_comment">
 			<div className="reviews_list_comment_top">
@@ -40,8 +42,25 @@ const Comment = ({date, rateUser, comment, food, service, interior}) => {
 					/>
 				</div>
 			</div>
+			{(user && ((user._id === rateUser._id) || user.role === "admin")) &&
+				<div className="row flex flex--end">
+					<Button onClick={() => deleteCommentHandler(_id)} btnClass="delete">Delete</Button>
+				</div>
+			}
 		</div>
 	);
+};
+
+Comment.propTypes = {
+	date: PropTypes.string.isRequired,
+	rateUser: PropTypes.object.isRequired,
+	comment: PropTypes.string.isRequired,
+	food: PropTypes.number.isRequired,
+	service: PropTypes.number.isRequired,
+	interior: PropTypes.number.isRequired,
+	user: PropTypes.object,
+	_id: PropTypes.string.isRequired,
+	deleteCommentHandler: PropTypes.func.isRequired,
 };
 
 export default Comment;

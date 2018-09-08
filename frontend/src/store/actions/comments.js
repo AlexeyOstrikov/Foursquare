@@ -1,14 +1,13 @@
 import axios from "src/axios-api";
-import { FETCH_COMMENTS_SUCCESS, ADD_COMMENT_FAILURE, FETCH_COMMENTS_FAILURE } from "./actionType";
+import {
+	FETCH_COMMENTS_SUCCESS,
+	COMMENT_FAILURE,
+} from "./actionType";
 import { NotificationManager } from "react-notifications";
 import { fetchPlaceById } from "./places";
 
-const addCommentFailure = error => {
-	return {type: ADD_COMMENT_FAILURE, error};
-};
-
-const fetchCommentFailure = error => {
-	return {type: FETCH_COMMENTS_FAILURE, error};
+const commentFailure = error => {
+	return {type: COMMENT_FAILURE, error};
 };
 
 const fetchCommentSuccess = comments => {
@@ -22,7 +21,7 @@ export const fetchComments = id => {
 				dispatch(fetchCommentSuccess(response.data));
 			},
 			error => {
-				dispatch(fetchCommentFailure(error));
+				dispatch(commentFailure(error));
 			}
 		);
 	};
@@ -37,7 +36,21 @@ export const addComment = comment => {
 				dispatch(fetchPlaceById(getState().places.currentPlace._id));
 			},
 			error => {
-				dispatch(addCommentFailure(error));
+				dispatch(commentFailure(error));
+			}
+		);
+	};
+};
+
+export const deleteComment = id => {
+	return (dispatch, getState) => {
+		axios.delete(`/comments/${id}`).then(
+			response => { // eslint-disable-line no-unused-vars
+				dispatch(fetchComments(getState().places.currentPlace._id));
+				dispatch(fetchPlaceById(getState().places.currentPlace._id));
+			},
+			error => {
+				dispatch(commentFailure(error));
 			}
 		);
 	};

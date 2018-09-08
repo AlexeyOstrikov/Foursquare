@@ -36,6 +36,18 @@ const createRouter = () => {
 		.catch(error => res.send(error));
 	});
 	
+	router.delete('/:id', auth, (req, res) => {
+		Comments.findById(req.params.id).then(result => {
+			if (req.user._id.equals(result.rateUser) || req.user.role === 'admin') {
+				Comments.deleteOne({_id: req.params.id})
+				.then(result => res.send(result))
+				.catch(error => res.status(400).send(error));
+			} else {
+				res.status(400).send({error: "You can not delete comment!"})
+			}
+		}).catch(error => res.status(400).send(error));
+	});
+	
 	return router;
 };
 

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addComment, fetchPlaceById, uploadPhoto, fetchComments, fetchPhotos } from "../store/actions";
+import { addComment, fetchPlaceById, uploadPhoto, fetchComments, fetchPhotos, deleteComment } from "../store/actions";
 import PropTypes from "prop-types";
 import notFound from "src/assets/images/not-found.jpeg";
 import config from "src/config";
@@ -16,6 +16,7 @@ class OnePlace extends Component {
 		fetchPhotos: PropTypes.func.isRequired,
 		addComment: PropTypes.func.isRequired,
 		uploadPhoto: PropTypes.func.isRequired,
+		deleteComment: PropTypes.func.isRequired,
 		place: PropTypes.object.isRequired,
 		match: PropTypes.object.isRequired,
 		user: PropTypes.object,
@@ -47,17 +48,20 @@ class OnePlace extends Component {
 					</div>
 				</div>
 				<Ratings average={average}/>
-				{(this.props.photos && this.props.photos.length !== 0) ?
+				{(this.props.photos && this.props.photos.length !== 0) &&
 					<Gallery photos={this.props.photos}/>
-					: null}
-				{(this.props.comments && this.props.comments.length !== 0) ?
-					<Reviews comments={this.props.comments}/>
-					: null}
-				{this.props.user ?
+				}
+				{(this.props.comments && this.props.comments.length !== 0) &&
+					<Reviews
+						deleteReview={this.props.deleteComment}
+						user={this.props.user ? this.props.user : null}
+						comments={this.props.comments}/>
+				}
+				{this.props.user &&
 					<Fragment>
 						<AddReviewForm submitReview={this.props.addComment} placeId={this.props.match.params.id}/>
 						<UploadPhoto uploadPhotoHandler={this.props.uploadPhoto} placeId={this.props.match.params.id}/>
-					</Fragment> : null
+					</Fragment>
 				}
 			</div>
 		);
@@ -78,6 +82,7 @@ const mapDispatchToProps = dispatch => {
 		fetchPhotos,
 		addComment,
 		uploadPhoto,
+		deleteComment,
 	},
 	dispatch);
 };

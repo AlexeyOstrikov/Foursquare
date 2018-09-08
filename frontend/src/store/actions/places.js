@@ -2,31 +2,21 @@ import axios from "../../axios-api";
 import { NotificationManager } from "react-notifications";
 import { push } from "react-router-redux";
 import {
-	ADD_PLACE_FAILURE,
-	FETCH_PLACE_BY_ID_FAILURE,
+	PLACE_FAILURE,
 	FETCH_PLACE_BY_ID_SUCCESS,
-	FETCH_PLACES_FAILURE,
 	FETCH_PLACES_SUCCESS
 } from "./actionType";
 
-const addPlaceFailure = (error) => {
-	return {type: ADD_PLACE_FAILURE, error};
+const placeFailure = (error) => {
+	return {type: PLACE_FAILURE, error};
 };
 
 const fetchPlacesSuccess = places => {
 	return {type: FETCH_PLACES_SUCCESS, places};
 };
 
-const fetchPlacesFailure = error => {
-	return {type: FETCH_PLACES_FAILURE, error};
-};
-
 const fetchPlaceByIdSuccess = place => {
 	return {type: FETCH_PLACE_BY_ID_SUCCESS, place};
-};
-
-const fetchPlaceByIdFailure = error => {
-	return {type: FETCH_PLACE_BY_ID_FAILURE, error};
 };
 
 export const addPlace = (place) => {
@@ -37,7 +27,7 @@ export const addPlace = (place) => {
 				dispatch(push("/"));
 			},
 			error => {
-				dispatch(addPlaceFailure(error));
+				dispatch(placeFailure(error));
 			}
 		);
 	};
@@ -48,7 +38,7 @@ export const fetchPlaces = () => {
 		axios.get("/places").then(response => {
 			dispatch(fetchPlacesSuccess(response.data));
 		}, error => {
-			dispatch(fetchPlacesFailure(error));
+			dispatch(placeFailure(error));
 		});
 	};
 };
@@ -57,7 +47,7 @@ export const fetchPlaceById = id => {
 	return dispatch => {
 		return axios.get(`/places/${id}`).then(
 			response => dispatch(fetchPlaceByIdSuccess(response.data),
-				error => dispatch(fetchPlaceByIdFailure(error)))
+				error => dispatch(placeFailure(error)))
 		);
 	};
 };

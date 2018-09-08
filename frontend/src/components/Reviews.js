@@ -5,9 +5,17 @@ import { Comment } from "src/components";
 export default class Reviews extends Component {
 	static propTypes = {
 		comments: PropTypes.array.isRequired,
+		user: PropTypes.object,
+		deleteReview: PropTypes.func.isRequired,
 	};
 	
-	renderComment = comment => <Comment key={comment._id} {...comment}/>;
+	renderComment = comment => (
+		<Comment
+			user={this.props.user}
+			key={comment._id} {...comment}
+			deleteCommentHandler={this.props.deleteReview}
+		/>
+	);
 	
 	render() {
 		return (

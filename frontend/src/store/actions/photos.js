@@ -1,19 +1,14 @@
 import axios from "../../axios-api";
 import { NotificationManager } from "react-notifications";
-import { ADD_PHOTO_FAILURE, FETCH_PHOTOS_SUCCESS, FETCH_PHOTOS_FAILURE } from "./actionType";
-
-const addPhotoFailure = error => {
-	return {type: ADD_PHOTO_FAILURE, error};
-};
+import { PHOTOS_FAILURE, FETCH_PHOTOS_SUCCESS } from "./actionType";
 
 const fetchPhotosSuccess = photos => {
 	return {type: FETCH_PHOTOS_SUCCESS, photos};
 };
 
-const fetchPhotosFailure = error => {
-	return {type: FETCH_PHOTOS_FAILURE, error};
+const photosFailure = error => {
+	return {type: PHOTOS_FAILURE, error};
 };
-
 
 export const uploadPhoto = photo => {
 	return (dispatch, getState) => {
@@ -23,7 +18,7 @@ export const uploadPhoto = photo => {
 				dispatch(fetchPhotos(getState().places.currentPlace._id));
 			},
 			error => {
-				dispatch(addPhotoFailure(error));
+				dispatch(photosFailure(error));
 			}
 		);
 	};
@@ -36,7 +31,7 @@ export const fetchPhotos = id => {
 				dispatch(fetchPhotosSuccess(response.data));
 			},
 			error => {
-				dispatch(fetchPhotosFailure(error));
+				dispatch(photosFailure(error));
 			}
 		);
 	};
