@@ -21,5 +21,11 @@
     box-shadow:         0 1px 10px 0 rgba(135, 133, 250, 0.5);
 }
 
+@mixin shadowHover {
+    -webkit-box-shadow: 0 1px 10px 0 rgba(255, 0, 0, 0.5);
+    -moz-box-shadow:    0 1px 10px 0 rgba(255, 0, 0, 0.5);
+    box-shadow:         0 1px 10px 0 rgba(255, 0, 0, 0.5);
+}
+
 
 

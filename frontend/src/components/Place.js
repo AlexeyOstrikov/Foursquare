@@ -1,16 +1,26 @@
 import React from "react";
 import notFound from "src/assets/images/not-found.jpeg";
 import config from "src/config";
+import "src/styles/Place.scss";
+import PropTypes from "prop-types";
 
-const Place = ({title, description, image}) => {
+const Place = ({title, clickHandler, image}) => {
 	let background = `url(${notFound})`;
 	
 	if (image) background = `url(${config.apiUrl}uploads/${image})`;
 	return (
 		<li className="one-place">
-			<div className="one-place_image" style={{ background }}/>
+			<div onClick={clickHandler} className="one-place_image"
+				 style={{background: `${background} center center / cover no-repeat rgba(0, 0, 0, 0.8)`}}/>
+			<div onClick={clickHandler} className="one-place_title">{title}</div>
 		</li>
 	);
+};
+
+Place.propTypes = {
+	title: PropTypes.string.isRequired,
+	image: PropTypes.string.isRequired,
+	clickHandler: PropTypes.func.isRequired
 };
 
 export default Place;

@@ -50,7 +50,7 @@ class AddPlace extends Component {
 	render() {
 		return (
 			<div className="add-page">
-				<h1>Add</h1>
+				<h1>Add place</h1>
 				<div className="add-page_container">
 					<div className="add-page_preview">
 						<img className="add-page_preview_image" src={this.state.preview || notFound} alt="avatar"/>
