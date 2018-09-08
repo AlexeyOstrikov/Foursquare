@@ -24,32 +24,78 @@ const upload = multer({storage});
 const createRouter = () => {
 	router.get('/', (req, res) => {
 		Places.find().then(async result => {
-			result.forEach(async place => {
-				const comments = [];
+			const newPlaces = result.map(async place => {
 				await Comments.find({placeId: place._id}).then(comment => {
+					const comments = [];
 					if (comment.length !== 0) {
 						comment.forEach(c => {
 							comments.push(c);
 						});
 					}
+					return comments;
+				}).then(comments => {
+					const acc = {food: 0, service: 0, interior: 0};
+					let average = comments.reduce((sum, vote) => {
+						let food = sum.food + vote.food;
+						let service = sum.service + vote.service;
+						let interior = sum.interior + vote.interior;
+						return {...sum, food, service, interior};
+					}, acc);
+					const length = comments.length === 0 ? 1 : comments.length;
+					average = {
+						food: average.food / length,
+						service: average.service / length,
+						interior: average.interior / length,
+					};
+					const avg = Object.values(average).reduce((sum, vote) => {
+						return sum + vote;
+					}, 0);
+					const size = Object.keys(average).length;
+					average.avg = avg / size;
+					place = {...place.toObject(), average};
+					return place;
 				});
-				Promise.all(comments).then(comments => {
-					console.log(place.title);
-					console.log('1',comments);
-				});
+				return place;
 			});
-			
-			// Promise.all(promise).then(comments => {
-			// 	console.log(comments);
-			// });
-			res.send(result);
+			const places = await Promise.all(newPlaces);
+			res.send(places);
 		}).catch(error => res.send(error));
 	});
 	
 	router.get('/:id', [auth], (req, res) => {
 		Places.findById(req.params.id)
-		.then(result => {
-			res.send(result)
+		.then(async place => {
+			await Comments.find({placeId: place._id}).then(comment => {
+				const comments = [];
+				if (comment.length !== 0) {
+					comment.forEach(c => {
+						comments.push(c);
+					});
+				}
+				return comments;
+			}).then(comments => {
+				const acc = {food: 0, service: 0, interior: 0};
+				let average = comments.reduce((sum, vote) => {
+					let food = sum.food + vote.food;
+					let service = sum.service + vote.service;
+					let interior = sum.interior + vote.interior;
+					return {...sum, food, service, interior};
+				}, acc);
+				const length = comments.length === 0 ? 1 : comments.length;
+				average = {
+					food: average.food / length,
+					service: average.service / length,
+					interior: average.interior / length,
+				};
+				const avg = Object.values(average).reduce((sum, vote) => {
+					return sum + vote;
+				}, 0);
+				const size = Object.keys(average).length;
+				average.avg = avg / size;
+				place = {...place.toObject(), average};
+				return place;
+			});
+			res.send(place);
 		}).catch(error => res.send(error));
 	});
 	

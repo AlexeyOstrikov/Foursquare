@@ -45,7 +45,7 @@ class OnePlace extends Component {
 						<img src={img} alt="place-image"/>
 					</div>
 				</div>
-				<Ratings/>
+				<Ratings average={this.props.place.average}/>
 				{(this.props.photos && this.props.photos.length !== 0) ?
 					<Gallery photos={this.props.photos}/>
 					: null}

@@ -4,6 +4,7 @@ import "src/styles/Ratings.scss";
 
 export default class Ratings extends Component {
 	render() {
+		const {avg, food, interior, service} = this.props.average;
 		return (
 			<div className="ratings">
 				<h2>Ratings</h2>
@@ -11,7 +12,7 @@ export default class Ratings extends Component {
 					<div className="row flex flex--start">
 						<div className="rating-title">Overall:</div>
 						<StarRatings
-							rating={2}
+							rating={avg}
 							starRatedColor="red"
 							starDimension="30px"
 							starSpacing="3px"
@@ -20,7 +21,7 @@ export default class Ratings extends Component {
 					<div className="row flex flex--start">
 						<div className="rating-title">Quality food:</div>
 						<StarRatings
-							rating={3}
+							rating={food}
 							starRatedColor="red"
 							starDimension="30px"
 							starSpacing="3px"
@@ -29,7 +30,7 @@ export default class Ratings extends Component {
 					<div className="row flex flex--start">
 						<div className="rating-title">Service:</div>
 						<StarRatings
-							rating={4}
+							rating={service}
 							starRatedColor="red"
 							starDimension="30px"
 							starSpacing="3px"
@@ -38,7 +39,7 @@ export default class Ratings extends Component {
 					<div className="row flex flex--start">
 						<div className="rating-title">Interior:</div>
 						<StarRatings
-							rating={2}
+							rating={interior}
 							starRatedColor="red"
 							starDimension="30px"
 							starSpacing="3px"
