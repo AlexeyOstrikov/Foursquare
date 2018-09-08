@@ -14,7 +14,6 @@ const Place = ({title, clickHandler, image, average: {avg}}) => {
 				 style={{background: `${background} center center / cover no-repeat`}}/>
 			<div onClick={clickHandler} className="one-place_title">{title}</div>
 			<div className="row flex flex--start">
-				<div className="rating-title">Overall:</div>
 				<StarRatings
 					rating={avg}
 					starRatedColor="red"
