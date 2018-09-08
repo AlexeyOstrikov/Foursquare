@@ -1,0 +1,16 @@
+.gallery {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #000;
+    &_list {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        &_photo {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            margin: 10px 0;
+        }
+    }
+}

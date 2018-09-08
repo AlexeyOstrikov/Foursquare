@@ -1,0 +1,16 @@
+.ratings {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #000;
+    .row.flex.flex--start {
+        margin-bottom: 10px;
+    }
+    &_list {
+        .rating-title {
+            width: 100px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 20px;
+        }
+    }
+}

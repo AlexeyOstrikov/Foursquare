@@ -23,6 +23,15 @@ const CommentsSchema = new Schema({
 		type: String,
 		required: true
 	},
+	placeId: {
+		type: Schema.Types.ObjectId,
+		ref: 'Places',
+		required: true
+	},
+	date: {
+		type: Date,
+		required: true
+	}
 });
 
 const Comments = mongoose.model('Comments', CommentsSchema);

@@ -11,7 +11,7 @@ const Place = ({title, clickHandler, image}) => {
 	return (
 		<li className="one-place">
 			<div onClick={clickHandler} className="one-place_image"
-				 style={{background: `${background} center center / cover no-repeat rgba(0, 0, 0, 0.8)`}}/>
+				 style={{background: `${background} center center / cover no-repeat`}}/>
 			<div onClick={clickHandler} className="one-place_title">{title}</div>
 		</li>
 	);

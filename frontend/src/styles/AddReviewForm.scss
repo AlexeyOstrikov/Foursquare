@@ -2,6 +2,10 @@
 @import "_mixins";
 
 .add-review-form {
+    margin-bottom: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
     .rating-title {
         width: 100px;
         display: block;

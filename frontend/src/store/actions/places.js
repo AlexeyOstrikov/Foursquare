@@ -61,9 +61,3 @@ export const fetchPlaceById = id => {
 		);
 	};
 };
-
-export const changePlaceRating = comment => {
-	return dispatch => {
-		return axios.post("/comments", comment);
-	};
-};

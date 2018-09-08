@@ -11,3 +11,8 @@ export { default as Input } from "./UI/Input";
 export { default as TextArea } from "./UI/TextArea";
 export { default as Place } from "./Place";
 export { default as AddReviewForm } from "./AddReviewForm";
+export { default as UploadPhoto } from "./UploadPhoto";
+export { default as Gallery } from "./Gallery";
+export { default as Reviews } from "./Reviews";
+export { default as Comment } from "./Comment";
+export { default as Ratings } from "./Ratings";

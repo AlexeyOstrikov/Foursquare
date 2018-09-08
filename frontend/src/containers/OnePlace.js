@@ -1,32 +1,38 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { changePlaceRating, fetchPlaceById } from "../store/actions";
+import { addComment, fetchPlaceById, uploadPhoto, fetchComments, fetchPhotos } from "../store/actions";
 import PropTypes from "prop-types";
 import notFound from "src/assets/images/not-found.jpeg";
 import config from "src/config";
 import "src/styles/OnePlace.scss";
-import { AddReviewForm } from "src/components";
+import { AddReviewForm, UploadPhoto, Gallery, Reviews, Ratings } from "src/components";
 
 class OnePlace extends Component {
 	
 	static propTypes = {
 		fetchPlaceById: PropTypes.func.isRequired,
-		changePlaceRating: PropTypes.func.isRequired,
+		fetchComments: PropTypes.func.isRequired,
+		fetchPhotos: PropTypes.func.isRequired,
+		addComment: PropTypes.func.isRequired,
+		uploadPhoto: PropTypes.func.isRequired,
 		place: PropTypes.object.isRequired,
 		match: PropTypes.object.isRequired,
+		comments: PropTypes.array.isRequired,
+		photos: PropTypes.array.isRequired,
 	};
 	
 	componentDidMount() {
 		if (this.props.match.params.id) {
 			this.props.fetchPlaceById(this.props.match.params.id);
+			this.props.fetchComments(this.props.match.params.id);
+			this.props.fetchPhotos(this.props.match.params.id);
 		}
 	}
 	
 	render() {
 		const {place: {description, title, image}} = this.props;
 		let img = `url(${notFound})`;
-		
 		if (image) img = `${config.apiUrl}uploads/${image}`;
 		return (
 			<div className="one-place-page">
@@ -39,7 +45,15 @@ class OnePlace extends Component {
 						<img src={img} alt="place-image"/>
 					</div>
 				</div>
-				<AddReviewForm submitReview={this.props.changePlaceRating} placeId={this.props.match.params.id}/>
+				<Ratings/>
+				{(this.props.photos && this.props.photos.length !== 0) ?
+					<Gallery photos={this.props.photos}/>
+					: null}
+				{(this.props.comments && this.props.comments.length !== 0) ?
+					<Reviews comments={this.props.comments}/>
+					: null}
+				<AddReviewForm submitReview={this.props.addComment} placeId={this.props.match.params.id}/>
+				<UploadPhoto uploadPhotoHandler={this.props.uploadPhoto} placeId={this.props.match.params.id}/>
 			</div>
 		);
 	}
@@ -47,12 +61,17 @@ class OnePlace extends Component {
 
 const mapStateToProps = state => ({
 	place: state.places.currentPlace,
+	photos: state.photos.currentPhotos,
+	comments: state.comments.currentComments,
 });
 
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({
 		fetchPlaceById,
-		changePlaceRating
+		fetchComments,
+		fetchPhotos,
+		addComment,
+		uploadPhoto,
 	},
 	dispatch);
 };

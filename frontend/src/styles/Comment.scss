@@ -1,0 +1,37 @@
+@import "_variables";
+@import "_mixins";
+
+.reviews_list_comment {
+    margin-bottom: 30px;
+    border: 1px solid #000;
+    border-radius: $radius;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    @include shadow;
+    &_top {
+        margin-bottom: 20px;
+        font-weight: bold;
+        font-size: 16px;
+        &_username {
+            color: $purple;
+            text-transform: uppercase;
+            margin-left: 20px;
+        }
+    }
+    &_description {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 20px;
+    }
+    &_rating {
+        .rating-title {
+            width: 100px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .row.flex.flex--start {
+            margin-bottom: 10px;
+        }
+    }
+}

@@ -6,6 +6,7 @@ const multer = require('multer');
 const path = require('path');
 const router = express.Router();
 const Places = require('../models/Places');
+const Comments = require('../models/Comments');
 
 const config = require('../config');
 
@@ -22,15 +23,34 @@ const upload = multer({storage});
 
 const createRouter = () => {
 	router.get('/', (req, res) => {
-		Places.find()
-		.then(result => res.send(result))
-		.catch(error => res.send(error));
+		Places.find().then(async result => {
+			result.forEach(async place => {
+				const comments = [];
+				await Comments.find({placeId: place._id}).then(comment => {
+					if (comment.length !== 0) {
+						comment.forEach(c => {
+							comments.push(c);
+						});
+					}
+				});
+				Promise.all(comments).then(comments => {
+					console.log(place.title);
+					console.log('1',comments);
+				});
+			});
+			
+			// Promise.all(promise).then(comments => {
+			// 	console.log(comments);
+			// });
+			res.send(result);
+		}).catch(error => res.send(error));
 	});
 	
 	router.get('/:id', [auth], (req, res) => {
 		Places.findById(req.params.id)
-		.then(result => res.send(result))
-		.catch(error => res.send(error));
+		.then(result => {
+			res.send(result)
+		}).catch(error => res.send(error));
 	});
 	
 	router.post('/', [auth, upload.fields([{name: 'image'}])], (req, res) => {

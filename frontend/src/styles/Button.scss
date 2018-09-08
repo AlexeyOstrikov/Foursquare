@@ -2,7 +2,7 @@
 @import "_mixins";
 
 button.btn , label.btn-label {
-    width: 198px;
+    padding: 0 30px;
     height: 60px;
     display: flex;
     border: none;
@@ -14,6 +14,7 @@ button.btn , label.btn-label {
     text-transform: uppercase;
     align-items: center;
     justify-content: center;
+    margin: 0;
     &:hover {
         box-shadow: 0 1px 20px 0 rgba(207, 147, 255, 0.7);
     }
