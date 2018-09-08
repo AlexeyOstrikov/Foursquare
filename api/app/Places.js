@@ -34,30 +34,15 @@ const createRouter = () => {
 	});
 	
 	router.post('/', [auth, upload.fields([{name: 'image'}])], (req, res) => {
-		const itemData = req.body;
+		const placeData = req.body;
 		if (req.files && req.files.image) {
-			itemData.image = req.files.image[0].filename
+			placeData.image = req.files.image[0].filename
 		}
 		
-		const item = new Places(itemData);
+		const item = new Places(placeData);
 		
 		item.save()
-		.then(newses => res.send(newses))
-		.catch(error => res.status(400).send(error));
-	});
-	
-	router.put('/:id', [auth], (req, res) => {
-		const item = req.body;
-		item._id = req.params.id;
-		
-		Places.findOneAndUpdate({_id: req.params.id}, item)
-		.then(result => res.send(result))
-		.catch(error => res.status(400).send(error));
-	});
-	
-	router.delete('/:id', [auth], (req, res) => {
-		Places.deleteOne({_id: req.params.id})
-		.then(result => res.send(result))
+		.then(places => res.send(places))
 		.catch(error => res.status(400).send(error));
 	});
 	

@@ -43,24 +43,6 @@ export const addPlace = (place) => {
 	};
 };
 
-export const deletePlace = id => {
-	return dispatch => {
-		axios.delete(`/places/${id}`).then(
-			() => dispatch(fetchPlaces())
-		);
-	};
-};
-
-export const editPlace = (id, place) => {
-	return dispatch => {
-		return axios.put(`/places/${id}`, place).then(
-			response => dispatch(fetchPlaces()), // eslint-disable-line no-unused-vars
-			error => {
-				console.log(error);
-			});
-	};
-};
-
 export const fetchPlaces = () => {
 	return dispatch => {
 		axios.get("/places").then(response => {
@@ -77,5 +59,11 @@ export const fetchPlaceById = id => {
 			response => dispatch(fetchPlaceByIdSuccess(response.data),
 				error => dispatch(fetchPlaceByIdFailure(error)))
 		);
+	};
+};
+
+export const changePlaceRating = comment => {
+	return dispatch => {
+		return axios.post("/comments", comment);
 	};
 };

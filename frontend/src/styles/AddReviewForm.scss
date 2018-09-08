@@ -1,0 +1,12 @@
+@import "_variables";
+@import "_mixins";
+
+.add-review-form {
+    .rating-title {
+        width: 100px;
+        display: block;
+        margin-right: 20px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+}

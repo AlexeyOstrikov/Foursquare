@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { FaImage } from "react-icons/fa/index";
 import { Input, Button, TextArea } from "src/components";
 import notFound from "src/assets/images/not-found.jpeg";
-import "src/styles/Add.scss";
+import "src/styles/AddPlace.scss";
 import { addPlace } from "../store/actions";
 
 class AddPlace extends Component {

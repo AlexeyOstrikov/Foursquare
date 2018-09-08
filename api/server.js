@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const config = require('./config');
 const users = require('./app/users');
 const places = require('./app/Places');
+const comments = require('./app/Comments');
 const app = express();
 
 app.use(cors());
@@ -19,6 +20,7 @@ db.once('open', () => {
 	console.log('Mongoose connected!');
 	app.use('/users', users());
 	app.use('/places', places());
+	app.use('/comments', comments());
 	
 	app.listen(8000, () => {
 		console.log(`Server started on ${port} port!`);

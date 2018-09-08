@@ -10,3 +10,4 @@ export { default as Footer } from "./UI/Footer";
 export { default as Input } from "./UI/Input";
 export { default as TextArea } from "./UI/TextArea";
 export { default as Place } from "./Place";
+export { default as AddReviewForm } from "./AddReviewForm";
