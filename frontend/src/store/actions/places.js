@@ -21,13 +21,13 @@ const fetchPlaceByIdSuccess = place => {
 
 export const addPlace = (place, checked) => {
 	return dispatch => {
-		return axios.post(`/places/${checked}`, place).then(
+		return axios.post(`/places?checked=${checked}`, place).then(
 			response => { // eslint-disable-line no-unused-vars
 				NotificationManager.success("Success", "Create successful");
 				dispatch(push("/"));
 			},
 			error => {
-				dispatch(placeFailure(error));
+				dispatch(placeFailure(error.response.data));
 			}
 		);
 	};

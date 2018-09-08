@@ -103,9 +103,7 @@ const createRouter = () => {
 		}).catch(error => res.send(error));
 	});
 	
-	router.post('/:checked', [auth, upload.fields([{name: 'image'}])], (req, res) => {
-		if (req.params.checked) return res.status(400).send({error: "You are not understand!"});
-		
+	router.post('/', [auth, upload.fields([{name: 'image'}])], (req, res) => {
 		const placeData = req.body;
 		
 		if (req.files && req.files.image) {
@@ -113,9 +111,12 @@ const createRouter = () => {
 		}
 		
 		const item = new Places(placeData);
-		
-		item.save().then(places => res.send(places))
-		.catch(error => res.status(400).send(error));
+		if (req.query.checked === "false") {
+			return res.status(400).send({error: "You are not understand!"});
+		} else {
+			item.save().then(places => res.send(places))
+			.catch(error => res.status(400).send(error));
+		}
 	});
 	
 	router.delete('/:id', [auth, permit('admin')], (req, res) => {
