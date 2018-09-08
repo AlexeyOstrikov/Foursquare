@@ -55,11 +55,12 @@ const createRouter = () => {
 					place = {...place.toObject(), average};
 					return place;
 				});
+				await Photos.find({placeId: place._id}).then(photos => {
+					const quantityPhotos = photos.length;
+					place = {...place, quantityPhotos};
+				});
 				return place;
 			});
-			// await Photos.find({placeId: req.params.id}).then(res => {
-			// 	console.log(res.length);
-			// });
 			const places = await Promise.all(newPlaces);
 			res.send(places);
 		}).catch(error => res.send(error));
