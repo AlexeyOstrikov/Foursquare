@@ -1,0 +1,22 @@
+textarea {
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    min-height: 70px;
+    padding: 12px;
+    font-size: 14px;
+    line-height: 18px;
+    width: 100%;
+    display: block;
+    resize: vertical;
+}
+
+label {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    padding-left: 12px;
+    margin-bottom: 8px;
+    display: block;
+    letter-spacing: 0.5px;
+}

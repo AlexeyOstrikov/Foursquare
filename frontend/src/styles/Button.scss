@@ -1,0 +1,31 @@
+@import "_variables";
+@import "_mixins";
+
+button.btn , label.btn-label {
+    width: 198px;
+    height: 60px;
+    display: flex;
+    border: none;
+    border-radius: $radius;
+    background: $purple;
+    font-size: 18px;
+    color: $white;
+    font-weight: 900;
+    text-transform: uppercase;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+        box-shadow: 0 1px 20px 0 rgba(207, 147, 255, 0.7);
+    }
+    &:active {
+        border: 1px solid $purple;
+        color: $purple;
+        background: $white;
+        box-shadow: none;
+    }
+    span {
+        margin-left: 10px;
+    }
+}
+
+

@@ -1,0 +1,23 @@
+@import "_variables";
+@import "_mixins";
+
+.footer {
+    background: #ffffff;
+    @include shadow;
+    margin-top: 30px;
+    &_container {
+        width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        padding: 15px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &_logo {
+        font-size: 20px;
+        color: $black;
+        font-weight: bold;
+    }
+}

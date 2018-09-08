@@ -1,0 +1,12 @@
+.register-page {
+    display: flex;
+    flex-direction: column;
+    &_form {
+        width: 600px;
+        margin: 0 auto;
+        flex-grow: 1;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+    }
+}

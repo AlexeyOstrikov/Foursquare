@@ -1,0 +1,71 @@
+@import "_variables";
+@import "_mixins";
+
+.header {
+    background: $white;
+    padding: 10px 0;
+    margin-bottom: 30px;
+    @include shadow;
+    &_container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 1200px;
+        margin: 0 auto;
+        padding: 15px;
+    }
+    &_logo {
+        font-size: 34px;
+        font-weight: bold;
+        color: $black;
+    }
+    &_menu {
+        display: flex;
+        align-items: center;
+        li {
+            margin: 0 10px;
+            a {
+                color: $purple;
+                font-size: 18px;
+                font-weight: bold;
+                &:hover, &.active {
+                    color: $red;
+                }
+                &.active {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    &_additional-block {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        .username-block {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            font-size: 20px;
+            text-transform: capitalize;
+            font-weight: bold;
+            margin-right: 40px;
+            span {
+                margin-left: 10px;
+            }
+        }
+        .btn-sign-out {
+            background: $purple;
+            color: $white;
+            font-size: 20px;
+            border-radius: $radius;
+            padding: 10px 20px;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            span {
+                margin-left: 10px;
+            }
+        }
+    }
+}
