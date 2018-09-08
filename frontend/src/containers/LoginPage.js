@@ -4,14 +4,19 @@ import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 import "src/styles/LoginPage.scss";
 import { Input, Button } from "src/components";
-import { loginUser } from "../store/actions";
+import { loginUser, deleteErrors } from "../store/actions";
 
 class LoginPage extends Component {
 	
 	static propTypes = {
 		loginUser: PropTypes.func.isRequired,
+		deleteErrors: PropTypes.func.isRequired,
 		loginError: PropTypes.object,
 	};
+	
+	componentDidMount() {
+		this.props.deleteErrors();
+	}
 	
 	state = {
 		username: "",
@@ -79,6 +84,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({
 		loginUser,
+		deleteErrors,
 	},
 	dispatch);
 };

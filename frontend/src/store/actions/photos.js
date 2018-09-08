@@ -18,7 +18,7 @@ export const uploadPhoto = photo => {
 				dispatch(fetchPhotos(getState().places.currentPlace._id));
 			},
 			error => {
-				dispatch(photosFailure(error));
+				dispatch(photosFailure(error.response.data));
 			}
 		);
 	};
@@ -31,7 +31,7 @@ export const fetchPhotos = id => {
 				dispatch(fetchPhotosSuccess(response.data));
 			},
 			error => {
-				dispatch(photosFailure(error));
+				dispatch(photosFailure(error.response.data));
 			}
 		);
 	};
@@ -44,7 +44,7 @@ export const deletePhoto = id => {
 				dispatch(fetchPhotos(getState().places.currentPlace._id));
 			},
 			error => {
-				dispatch(photosFailure(error));
+				dispatch(photosFailure(error.response.data));
 			}
 		);
 	};

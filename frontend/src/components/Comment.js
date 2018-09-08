@@ -18,7 +18,7 @@ const Comment = ({deleteCommentHandler, date, rateUser, comment, food, service, 
 					<div className="rating-title">Quality food:</div>
 					<StarRatings
 						rating={food}
-						starRatedColor="red"
+						starRatedColor="gold"
 						starDimension="20px"
 						starSpacing="1px"
 					/>
@@ -27,7 +27,7 @@ const Comment = ({deleteCommentHandler, date, rateUser, comment, food, service, 
 					<div className="rating-title">Service:</div>
 					<StarRatings
 						rating={service}
-						starRatedColor="red"
+						starRatedColor="gold"
 						starDimension="20px"
 						starSpacing="1px"
 					/>
@@ -36,7 +36,7 @@ const Comment = ({deleteCommentHandler, date, rateUser, comment, food, service, 
 					<div className="rating-title">Interior:</div>
 					<StarRatings
 						rating={interior}
-						starRatedColor="red"
+						starRatedColor="gold"
 						starDimension="20px"
 						starSpacing="1px"
 					/>

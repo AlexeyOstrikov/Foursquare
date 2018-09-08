@@ -19,7 +19,7 @@ const Place = ({quantityPhotos, title, clickHandler, image, average: {avg}, user
 			<div className="one-place_rating">
 				<StarRatings
 					rating={avg}
-					starRatedColor="red"
+					starRatedColor="gold"
 					starDimension="30px"
 					starSpacing="3px"
 				/>

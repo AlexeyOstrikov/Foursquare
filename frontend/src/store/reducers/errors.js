@@ -7,7 +7,7 @@ import {
 	REGISTER_USER_SUCCESS,
 	PLACE_FAILURE,
 	COMMENT_FAILURE,
-	PHOTOS_FAILURE,
+	PHOTOS_FAILURE, DELETE_ERRORS,
 } from "../actions/actionType";
 import merge from "xtend";
 
@@ -36,9 +36,17 @@ const reducer = (state = initialState, action) => {
 		case FETCH_PLACE_BY_ID_SUCCESS:
 			return merge(state, {placesError: null});
 		case COMMENT_FAILURE:
-			return merge(state, {commentsError: null});
+			return merge(state, {commentsError: action.error});
 		case PHOTOS_FAILURE:
-			return merge(state, {photosError: null});
+			return merge(state, {photosError: action.error});
+		case DELETE_ERRORS:
+			return merge(state, {
+				registerError: null,
+				loginError: null,
+				placesError: null,
+				commentsError: null,
+				photosError: null,
+			});
 		default:
 			return state;
 	}

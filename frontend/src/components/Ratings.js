@@ -13,7 +13,7 @@ export default class Ratings extends Component {
 						<div className="rating-title">Overall:</div>
 						<StarRatings
 							rating={avg}
-							starRatedColor="red"
+							starRatedColor="gold"
 							starDimension="30px"
 							starSpacing="3px"
 						/>
@@ -22,7 +22,7 @@ export default class Ratings extends Component {
 						<div className="rating-title">Quality food:</div>
 						<StarRatings
 							rating={food}
-							starRatedColor="red"
+							starRatedColor="gold"
 							starDimension="30px"
 							starSpacing="3px"
 						/>
@@ -31,7 +31,7 @@ export default class Ratings extends Component {
 						<div className="rating-title">Service:</div>
 						<StarRatings
 							rating={service}
-							starRatedColor="red"
+							starRatedColor="gold"
 							starDimension="30px"
 							starSpacing="3px"
 						/>
@@ -40,7 +40,7 @@ export default class Ratings extends Component {
 						<div className="rating-title">Interior:</div>
 						<StarRatings
 							rating={interior}
-							starRatedColor="red"
+							starRatedColor="gold"
 							starDimension="30px"
 							starSpacing="3px"
 						/>

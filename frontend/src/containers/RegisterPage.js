@@ -4,14 +4,19 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import "src/styles/RegisterPage.scss";
 import { Input, Button } from "src/components";
-import { registerUser } from "../store/actions";
+import { registerUser, deleteErrors } from "../store/actions";
 
 class RegisterPage extends Component {
 	
 	static propTypes = {
 		registerUser: PropTypes.func.isRequired,
+		deleteErrors: PropTypes.func.isRequired,
 		registerError: PropTypes.object
 	};
+	
+	componentDidMount() {
+		this.props.deleteErrors();
+	}
 	
 	state = {
 		username: "",
@@ -79,6 +84,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({
 		registerUser,
+		deleteErrors,
 	},
 	dispatch);
 };

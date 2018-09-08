@@ -38,7 +38,7 @@ export const fetchPlaces = () => {
 		axios.get("/places").then(response => {
 			dispatch(fetchPlacesSuccess(response.data));
 		}, error => {
-			dispatch(placeFailure(error));
+			dispatch(placeFailure(error.response.data));
 		});
 	};
 };
@@ -47,7 +47,7 @@ export const fetchPlaceById = id => {
 	return dispatch => {
 		return axios.get(`/places/${id}`).then(
 			response => dispatch(fetchPlaceByIdSuccess(response.data),
-				error => dispatch(placeFailure(error)))
+				error => dispatch(placeFailure(error.response.data)))
 		);
 	};
 };
@@ -59,7 +59,7 @@ export const deletePlace = id => {
 				dispatch(fetchPlaces());
 			},
 			error => {
-				dispatch(placeFailure(error));
+				dispatch(placeFailure(error.response.data));
 			}
 		);
 	};

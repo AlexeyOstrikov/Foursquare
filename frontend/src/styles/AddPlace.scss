@@ -26,14 +26,33 @@
             flex-flow: nowrap row;
             align-items: center;
             justify-content: flex-start;
+            padding-left: 30px;
+            position: relative;
             label {
                 margin: 0;
                 font-size: 16px;
             }
-            input {
+            .input-label {
                 width: 20px;
                 height: 20px;
                 display: block;
+                border: 2px solid #000;
+                border-radius: $radius;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+            }
+            input:checked + .input-label::before {
+                content: "";
+                width: 70%;
+                height: 70%;
+                background: $purple;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                @include transform;
+                border-radius: 2px;
             }
         }
     }

@@ -21,7 +21,7 @@ export const fetchComments = id => {
 				dispatch(fetchCommentSuccess(response.data));
 			},
 			error => {
-				dispatch(commentFailure(error));
+				dispatch(commentFailure(error.response.data));
 			}
 		);
 	};
@@ -36,7 +36,7 @@ export const addComment = comment => {
 				dispatch(fetchPlaceById(getState().places.currentPlace._id));
 			},
 			error => {
-				dispatch(commentFailure(error));
+				dispatch(commentFailure(error.response.data));
 			}
 		);
 	};
@@ -50,7 +50,7 @@ export const deleteComment = id => {
 				dispatch(fetchPlaceById(getState().places.currentPlace._id));
 			},
 			error => {
-				dispatch(commentFailure(error));
+				dispatch(commentFailure(error.response.data));
 			}
 		);
 	};

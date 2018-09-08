@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import nanoid from "nanoid";
 import "../../styles/TextArea.scss";
 
-const TextArea = ({value, labelText, onChange, name, placeholder, required, className}) => {
+const TextArea = ({style, value, labelText, onChange, name, placeholder, required, className}) => {
 	const id = nanoid();
 	
 	return (
@@ -17,6 +17,7 @@ const TextArea = ({value, labelText, onChange, name, placeholder, required, clas
 				id={id}
 				name={name}
 				placeholder={placeholder}
+				style={style}
 			/>
 		</Fragment>
 	);
@@ -29,7 +30,8 @@ TextArea.propTypes = {
 	placeholder: PropTypes.string,
 	onChange: PropTypes.func.isRequired,
 	required: PropTypes.bool,
-	className: PropTypes.string
+	className: PropTypes.string,
+	style: PropTypes.object
 };
 
 export default TextArea;

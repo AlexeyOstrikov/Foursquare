@@ -9,6 +9,7 @@ export default class AddReviewForm extends Component {
 	static propTypes = {
 		placeId: PropTypes.any.isRequired,
 		submitReview: PropTypes.func.isRequired,
+		error: PropTypes.any,
 	};
 	
 	state = {
@@ -40,50 +41,59 @@ export default class AddReviewForm extends Component {
 	changeRating = (value, name) => this.setState({[name]: value});
 	
 	render() {
+		const style = this.props.error ? { borderColor: "#ff0000" } : {};
+		const starEmptyColor = this.props.error ? "#ff0000" : "grey";
 		return (
 			<div className="add-review-form">
 				<h2>Add review</h2>
 				<form onSubmit={this.submitFormHandler}>
 					<div className="row">
-						<TextArea name="comment" onChange={this.inputChangeHandler} value={this.state.comment}/>
+						<TextArea
+							style={style}
+						  	name="comment"
+							onChange={this.inputChangeHandler}
+							value={this.state.comment}/>
 					</div>
 					<div className="row flex flex--start">
 						<div className="rating-title">Quality food:</div>
 						<StarRatings
 							rating={this.state.food}
-							starHoverColor="red"
-							starRatedColor="red"
+							starHoverColor="gold"
+							starRatedColor="gold"
 							changeRating={this.changeRating}
 							numberOfStars={5}
 							name='food'
 							starDimension="30px"
 							starSpacing="3px"
+							starEmptyColor={starEmptyColor}
 						/>
 					</div>
 					<div className="row flex flex--start">
 						<div className="rating-title">Service:</div>
 						<StarRatings
 							rating={this.state.service}
-							starHoverColor="red"
-							starRatedColor="red"
+							starHoverColor="gold"
+							starRatedColor="gold"
 							changeRating={this.changeRating}
 							numberOfStars={5}
 							name='service'
 							starDimension="30px"
 							starSpacing="3px"
+							starEmptyColor={starEmptyColor}
 						/>
 					</div>
 					<div className="row flex flex--start">
 						<div className="rating-title">Interior:</div>
 						<StarRatings
 							rating={this.state.interior}
-							starHoverColor="red"
-							starRatedColor="red"
+							starHoverColor="gold"
+							starRatedColor="gold"
 							changeRating={this.changeRating}
 							numberOfStars={5}
 							name='interior'
 							starDimension="30px"
 							starSpacing="3px"
+							starEmptyColor={starEmptyColor}
 						/>
 					</div>
 					<div className="row flex flex--end">

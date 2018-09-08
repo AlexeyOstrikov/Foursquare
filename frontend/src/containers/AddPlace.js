@@ -6,12 +6,18 @@ import { FaImage } from "react-icons/fa/index";
 import { Input, Button, TextArea } from "src/components";
 import notFound from "src/assets/images/not-found.jpeg";
 import "src/styles/AddPlace.scss";
-import { addPlace } from "../store/actions";
+import { addPlace, deleteErrors } from "../store/actions";
 
 class AddPlace extends Component {
 	static propTypes = {
 		addPlace: PropTypes.func.isRequired,
+		deleteErrors: PropTypes.func.isRequired,
+		error: PropTypes.any,
 	};
+	
+	componentDidMount() {
+		this.props.deleteErrors();
+	}
 	
 	state = {
 		place: {
@@ -53,12 +59,13 @@ class AddPlace extends Component {
 	};
 	
 	render() {
+		const style = this.props.error ? { borderColor: "#ff0000" } : {};
 		return (
 			<div className="add-page">
 				<h1>Add place</h1>
 				<div className="add-page_container">
 					<div className="add-page_preview">
-						<img className="add-page_preview_image" src={this.state.preview || notFound} alt="avatar"/>
+						<img style={style} className="add-page_preview_image" src={this.state.preview || notFound} alt="avatar"/>
 						<label className="btn-label" htmlFor="image"><FaImage/><span>Add photo</span></label>
 						<input id="image"
 							   hidden
@@ -75,6 +82,7 @@ class AddPlace extends Component {
 									name="title"
 									type="text"
 									labelText="Title"
+									style={style}
 								/>
 							</div>
 							<div className="row">
@@ -83,17 +91,21 @@ class AddPlace extends Component {
 									value={this.state.place.description}
 									name="description"
 									labelText="Description"
+									style={style}
 								/>
 							</div>
 							<div className="row flex">
 								<div className="add-page_form_checkbox">
 									<input
+										style={style}
 										onChange={this.checkboxChangeHandler}
 										checked={this.state.checked}
 										name="checkbox"
 										id="checkbox"
+										hidden
 										type="checkbox"/>
-									<label htmlFor="checkbox">I understand</label>
+									<label style={style} className="input-label" htmlFor="checkbox"/>
+									<label>I understand</label>
 								</div>
 								<Button>Create</Button>
 							</div>
@@ -108,8 +120,13 @@ class AddPlace extends Component {
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({
 		addPlace,
+		deleteErrors,
 	},
 	dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(AddPlace);
+const mapStateToProps = state => ({
+	error: state.errors.placesError
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddPlace);
