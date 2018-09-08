@@ -3,7 +3,7 @@ import { routerMiddleware, routerReducer } from "react-router-redux";
 import thunkMiddleware from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 import { persistCombineReducers, persistStore } from "redux-persist";
-import itemsReducer from "./reducers/items";
+import placesReducer from "./reducers/places";
 import userReducer from "./reducers/user";
 import errorsReducer from "./reducers/errors";
 import createHistory from "history/createBrowserHistory";
@@ -22,7 +22,7 @@ const persistConfig = {
 };
 
 const rootReducer = persistCombineReducers(persistConfig, {
-	items: itemsReducer,
+	places: placesReducer,
 	user: userReducer,
 	errors: errorsReducer,
 	routing: routerReducer,

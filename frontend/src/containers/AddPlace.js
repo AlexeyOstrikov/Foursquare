@@ -2,25 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
-import Select from "react-select";
 import { FaImage } from "react-icons/fa/index";
 import { Input, Button, TextArea } from "src/components";
 import notFound from "src/assets/images/not-found.jpeg";
 import "src/styles/Add.scss";
-import { addItem } from "../store/actions";
+import { addPlace } from "../store/actions";
 
-class Add extends Component {
+class AddPlace extends Component {
 	static propTypes = {
-		addItem: PropTypes.func.isRequired,
+		addPlace: PropTypes.func.isRequired,
 	};
 	
 	state = {
-		item: {
-			name: "",
-			phone: "",
-			address: "",
+		place: {
+			title: "",
 			description: "",
-			category: null,
 			image: "",
 		},
 		preview: null,
@@ -28,11 +24,7 @@ class Add extends Component {
 	
 	inputChangeHandler = event => {
 		const {name, value} = event.target;
-		this.setState({item: {...this.state.item, [name]: value}});
-	};
-	
-	selectChangeHandler = category => {
-		this.setState({item: {...this.state.item, category}});
+		this.setState({place: {...this.state.place, [name]: value}});
 	};
 	
 	fileChangeHandler = event => {
@@ -42,27 +34,20 @@ class Add extends Component {
 			reader.onload = (event) => this.setState({preview: event.target.result});
 			reader.readAsDataURL(files[0]);
 		}
-		this.setState({item: {...this.state.item, [name]: files[0]}});
+		this.setState({place: {...this.state.place, [name]: files[0]}});
 	};
 	
 	submitFormHandler = event => {
 		event.preventDefault();
 		const formData = new FormData();
-		const {item} = this.state;
-		Object.keys(this.state.item).forEach(key => {
-			key === "category" ? formData.append(key, item[key].label) : formData.append(key, item[key]);
+		const {place} = this.state;
+		Object.keys(place).forEach(key => {
+			formData.append(key, place[key]);
 		});
-		this.props.addItem(formData);
+		this.props.addPlace(formData);
 	};
 	
 	render() {
-		const options = [
-			{label: "Friends", value: 1},
-			{label: "Colleagues", value: 2},
-			{label: "Family", value: 3},
-			{label: "Guys", value: 4},
-			{label: "Girls", value: 5},
-		];
 		return (
 			<div className="add-page">
 				<h1>Add</h1>
@@ -80,43 +65,17 @@ class Add extends Component {
 						<form onSubmit={this.submitFormHandler}>
 							<div className="row">
 								<Input
-									value={this.state.item.name}
+									value={this.state.place.title}
 									onChange={this.inputChangeHandler}
-									name="name"
+									name="title"
 									type="text"
-									labelText="Name"
-								/>
-							</div>
-							<div className="row">
-								<Input
-									value={this.state.item.phone}
-									onChange={this.inputChangeHandler}
-									name="phone"
-									type="text"
-									labelText="Phone"
-								/>
-							</div>
-							<div className="row">
-								<Select
-									name="category"
-									value={this.state.item.category}
-									onChange={this.selectChangeHandler}
-									options={options}
-									placeholder="Select category"
+									labelText="Title"
 								/>
 							</div>
 							<div className="row">
 								<TextArea
 									onChange={this.inputChangeHandler}
-									value={this.state.item.address}
-									name="address"
-									labelText="Address"
-								/>
-							</div>
-							<div className="row">
-								<TextArea
-									onChange={this.inputChangeHandler}
-									value={this.state.item.description}
+									value={this.state.place.description}
 									name="description"
 									labelText="Description"
 								/>
@@ -132,13 +91,11 @@ class Add extends Component {
 	}
 }
 
-const mapStateToProps = state => ({});
-
 const mapDispatchToProps = dispatch => {
 	return bindActionCreators({
-		addItem,
+		addPlace,
 	},
 	dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Add);
+export default connect(null, mapDispatchToProps)(AddPlace);

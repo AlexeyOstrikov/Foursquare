@@ -5,7 +5,7 @@ const nanoid = require('nanoid');
 const multer = require('multer');
 const path = require('path');
 const router = express.Router();
-const Items = require('../models/Items');
+const Places = require('../models/Places');
 
 const config = require('../config');
 
@@ -22,13 +22,13 @@ const upload = multer({storage});
 
 const createRouter = () => {
 	router.get('/', (req, res) => {
-		Items.find()
+		Places.find()
 		.then(result => res.send(result))
 		.catch(error => res.send(error));
 	});
 	
 	router.get('/:id', [auth], (req, res) => {
-		Items.findById(req.params.id)
+		Places.findById(req.params.id)
 		.then(result => res.send(result))
 		.catch(error => res.send(error));
 	});
@@ -39,7 +39,7 @@ const createRouter = () => {
 			itemData.image = req.files.image[0].filename
 		}
 		
-		const item = new Items(itemData);
+		const item = new Places(itemData);
 		
 		item.save()
 		.then(newses => res.send(newses))
@@ -50,13 +50,13 @@ const createRouter = () => {
 		const item = req.body;
 		item._id = req.params.id;
 		
-		Items.findOneAndUpdate({_id: req.params.id}, item)
+		Places.findOneAndUpdate({_id: req.params.id}, item)
 		.then(result => res.send(result))
 		.catch(error => res.status(400).send(error));
 	});
 	
 	router.delete('/:id', [auth], (req, res) => {
-		Items.deleteOne({_id: req.params.id})
+		Places.deleteOne({_id: req.params.id})
 		.then(result => res.send(result))
 		.catch(error => res.status(400).send(error));
 	});

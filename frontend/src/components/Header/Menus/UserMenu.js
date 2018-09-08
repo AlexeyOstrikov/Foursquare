@@ -13,8 +13,8 @@ export default class UserMenu extends Component {
 		return (
 			<Fragment>
 				<ul className="header_menu">
-					<li><NavLink exact to="/">Items</NavLink></li>
-					<li><NavLink exact to="/add">Add item</NavLink></li>
+					<li><NavLink exact to="/">Places</NavLink></li>
+					<li><NavLink exact to="/add">Add place</NavLink></li>
 				</ul>
 				<div className="header_additional-block">
 					<div className="username-block"><FaUser/> <span>{this.props.user.username}</span></div>

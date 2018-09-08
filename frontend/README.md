@@ -324,7 +324,7 @@ yarn add husky lint-staged prettier
 
 Now we can make sure every file is formatted correctly by adding a few lines to the `package.json` in the project root.
 
-Add the following line to `scripts` section:
+AddPlace the following line to `scripts` section:
 
 ```diff
   "scripts": {
@@ -797,7 +797,7 @@ Sometimes you might need to tweak the visual styles of Bootstrap (or equivalent 
 We suggest the following approach:
 
 * Create a new package that depends on the package you wish to customize, e.g. Bootstrap.
-* Add the necessary build steps to tweak the theme, and publish your package on npm.
+* AddPlace the necessary build steps to tweak the theme, and publish your package on npm.
 * Install your own theme npm package as a dependency of your app.
 
 Here is an example of adding a [customized Bootstrap](https://medium.com/@tacomanator/customizing-create-react-app-aa9ffb88165) that follows these steps.
@@ -811,9 +811,9 @@ Recent versions of [Flow](http://flowtype.org/) work with Create React App proje
 To add Flow to a Create React App project, follow these steps:
 
 1. Run `npm install --save flow-bin` (or `yarn add flow-bin`).
-2. Add `"flow": "flow"` to the `scripts` section of your `package.json`.
+2. AddPlace `"flow": "flow"` to the `scripts` section of your `package.json`.
 3. Run `npm run flow init` (or `yarn flow init`) to create a [`.flowconfig` file](https://flowtype.org/docs/advanced-configuration.html) in the root directory.
-4. Add `// @flow` to any files you want to type check (for example, to `src/App.js`).
+4. AddPlace `// @flow` to any files you want to type check (for example, to `src/App.js`).
 
 Now you can run `npm run flow` (or `yarn flow`) to check the files for type errors.
 You can optionally use an IDE like [Nuclide](https://nuclide.io/docs/languages/flow/) for a better integrated experience.
@@ -1529,7 +1529,7 @@ Popular CI servers already set the environment variable `CI` by default but you 
 #### Travis CI
 
 1. Following the [Travis Getting started](https://docs.travis-ci.com/user/getting-started/) guide for syncing your GitHub repository with Travis.  You may need to initialize some settings manually in your [profile](https://travis-ci.org/profile) page.
-1. Add a `.travis.yml` file to your git repository.
+1. AddPlace a `.travis.yml` file to your git repository.
 ```
 language: node_js
 node_js:
@@ -1640,7 +1640,7 @@ There are various ways to setup a debugger for your Jest tests. We cover debuggi
 
 ### Debugging Tests in Chrome
 
-Add the following to the `scripts` section in your project's `package.json`
+AddPlace the following to the `scripts` section in your project's `package.json`
 ```json
 "scripts": {
     "test:debug": "react-scripts --inspect-brk test --runInBand --env=jsdom"
@@ -2119,13 +2119,13 @@ Now, after you create a production build with `npm run build`, you can deploy it
     Hosting URL: https://example-app-fd690.firebaseapp.com
 ```
 
-For more information see [Add Firebase to your JavaScript Project](https://firebase.google.com/docs/web/setup).
+For more information see [AddPlace Firebase to your JavaScript Project](https://firebase.google.com/docs/web/setup).
 
 ### [GitHub Pages](https://pages.github.com/)
 
 >Note: this feature is available with `react-scripts@0.2.0` and higher.
 
-#### Step 1: Add `homepage` to `package.json`
+#### Step 1: AddPlace `homepage` to `package.json`
 
 **The step below is important!**<br>
 **If you skip it, your app will not deploy correctly.**
@@ -2160,7 +2160,7 @@ Alternatively you may use `yarn`:
 yarn add gh-pages
 ```
 
-Add the following scripts in your `package.json`:
+AddPlace the following scripts in your `package.json`:
 
 ```diff
   "scripts": {
