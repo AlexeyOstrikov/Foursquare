@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addComment, fetchPlaceById, uploadPhoto, fetchComments, fetchPhotos } from "../store/actions";
@@ -18,6 +18,7 @@ class OnePlace extends Component {
 		uploadPhoto: PropTypes.func.isRequired,
 		place: PropTypes.object.isRequired,
 		match: PropTypes.object.isRequired,
+		user: PropTypes.object,
 		comments: PropTypes.array.isRequired,
 		photos: PropTypes.array.isRequired,
 	};
@@ -31,7 +32,7 @@ class OnePlace extends Component {
 	}
 	
 	render() {
-		const {place: {description, title, image}} = this.props;
+		const {place: {description, title, image, average}} = this.props;
 		let img = `url(${notFound})`;
 		if (image) img = `${config.apiUrl}uploads/${image}`;
 		return (
@@ -45,15 +46,19 @@ class OnePlace extends Component {
 						<img src={img} alt="place-image"/>
 					</div>
 				</div>
-				<Ratings average={this.props.place.average}/>
+				<Ratings average={average}/>
 				{(this.props.photos && this.props.photos.length !== 0) ?
 					<Gallery photos={this.props.photos}/>
 					: null}
 				{(this.props.comments && this.props.comments.length !== 0) ?
 					<Reviews comments={this.props.comments}/>
 					: null}
-				<AddReviewForm submitReview={this.props.addComment} placeId={this.props.match.params.id}/>
-				<UploadPhoto uploadPhotoHandler={this.props.uploadPhoto} placeId={this.props.match.params.id}/>
+				{this.props.user ?
+					<Fragment>
+						<AddReviewForm submitReview={this.props.addComment} placeId={this.props.match.params.id}/>
+						<UploadPhoto uploadPhotoHandler={this.props.uploadPhoto} placeId={this.props.match.params.id}/>
+					</Fragment> : null
+				}
 			</div>
 		);
 	}
@@ -63,6 +68,7 @@ const mapStateToProps = state => ({
 	place: state.places.currentPlace,
 	photos: state.photos.currentPhotos,
 	comments: state.comments.currentComments,
+	user: state.user.user,
 });
 
 const mapDispatchToProps = dispatch => {

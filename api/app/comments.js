@@ -30,7 +30,7 @@ const createRouter = () => {
 		});
 	});
 	
-	router.get('/:id', [auth], (req, res) => {
+	router.get('/:id', (req, res) => {
 		Comments.find({placeId: req.params.id}).populate("rateUser")
 		.then(result => res.send(result))
 		.catch(error => res.send(error));

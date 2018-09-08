@@ -12,8 +12,8 @@ const Routes = ({user}) => {
 			<Route path="/login" exact component={LoginPage}/>
 			<Route path="/register" exact component={RegisterPage}/>
 			<Route exact path="/" component={Places}/>
+			<Route exact isAllowed={user} path="/place/:id" component={OnePlace}/>
 			<ProtectRoute exact isAllowed={user} path="/add" component={AddPlace}/>
-			<ProtectRoute exact isAllowed={user} path="/place/:id" component={OnePlace}/>
 		</Switch>
 	);
 };

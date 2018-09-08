@@ -26,7 +26,15 @@ export default class AddReviewForm extends Component {
 	
 	submitFormHandler = event => {
 		event.preventDefault();
-		this.props.submitReview(this.state);
+		this.props.submitReview(this.state).then(() => {
+			this.setState({
+				comment: "",
+				food: 0,
+				service: 0,
+				interior: 0,
+				placeId: this.props.placeId,
+			});
+		});
 	};
 	
 	changeRating = (value, name) => this.setState({[name]: value});

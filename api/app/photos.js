@@ -19,7 +19,6 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 const createRouter = () => {
-	
 	router.post('/', [auth, upload.fields([{name: 'photo'}])], (req, res) => {
 		const photoData = req.body;
 		if (req.files && req.files.photo) {
@@ -34,7 +33,7 @@ const createRouter = () => {
 		.catch(error => res.status(400).send(error));
 	});
 	
-	router.get('/:id', [auth], (req, res) => {
+	router.get('/:id', (req, res) => {
 		Photos.find({placeId: req.params.id})
 		.then(result => res.send(result))
 		.catch(error => res.send(error));

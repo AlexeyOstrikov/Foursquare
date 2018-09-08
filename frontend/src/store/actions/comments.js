@@ -1,6 +1,7 @@
 import axios from "src/axios-api";
 import { FETCH_COMMENTS_SUCCESS, ADD_COMMENT_FAILURE, FETCH_COMMENTS_FAILURE } from "./actionType";
 import { NotificationManager } from "react-notifications";
+import { fetchPlaceById } from "./places";
 
 const addCommentFailure = error => {
 	return {type: ADD_COMMENT_FAILURE, error};
@@ -30,9 +31,10 @@ export const fetchComments = id => {
 export const addComment = comment => {
 	return (dispatch, getState) => {
 		return axios.post("/comments", comment).then(
-			response => {
+			response => { // eslint-disable-line no-unused-vars
 				NotificationManager.success("Success", "Create comment successful");
 				dispatch(fetchComments(getState().places.currentPlace._id));
+				dispatch(fetchPlaceById(getState().places.currentPlace._id));
 			},
 			error => {
 				dispatch(addCommentFailure(error));

@@ -7,7 +7,7 @@ const path = require('path');
 const router = express.Router();
 const Places = require('../models/Places');
 const Comments = require('../models/Comments');
-
+const Photos = require('../models/Photos');
 const config = require('../config');
 
 const storage = multer.diskStorage({
@@ -57,12 +57,15 @@ const createRouter = () => {
 				});
 				return place;
 			});
+			// await Photos.find({placeId: req.params.id}).then(res => {
+			// 	console.log(res.length);
+			// });
 			const places = await Promise.all(newPlaces);
 			res.send(places);
 		}).catch(error => res.send(error));
 	});
 	
-	router.get('/:id', [auth], (req, res) => {
+	router.get('/:id', (req, res) => {
 		Places.findById(req.params.id)
 		.then(async place => {
 			await Comments.find({placeId: place._id}).then(comment => {

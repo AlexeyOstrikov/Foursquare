@@ -18,7 +18,7 @@ const fetchPhotosFailure = error => {
 export const uploadPhoto = photo => {
 	return (dispatch, getState) => {
 		return axios.post("/photos", photo).then(
-			response => {
+			response => { // eslint-disable-line no-unused-vars
 				NotificationManager.success("Success", "Add photo successful");
 				dispatch(fetchPhotos(getState().places.currentPlace._id));
 			},
